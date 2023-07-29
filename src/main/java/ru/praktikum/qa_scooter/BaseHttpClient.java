@@ -23,6 +23,10 @@ abstract class BaseHttpClient {
         RequestSpecification request = given(baseRequest());
         return request.delete(url).then();
     }
+    public  ValidatableResponse doPutRequest(String url){
+        return given(baseRequest()).put(url).then();
+    }
+
 
     private RequestSpecification baseRequest() {
         return new RequestSpecBuilder()

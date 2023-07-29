@@ -19,7 +19,7 @@ public class CourierHttpClient extends BaseHttpClient {
     public ValidatableResponse createCourier(CourierDTO courierDTO) {
         return doPostRequest(url, courierDTO);
     }
-    public ValidatableResponse deleteCourier(Integer id) {
+    public ValidatableResponse deleteCourier(String id) {
         return doDeleteRequest(url + id);
     }
 }

@@ -1,9 +1,12 @@
-package ru.praktikum.qa_scooter;
+package ru.praktikum.qa_scooter.courier;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Before;
+import ru.praktikum.qa_scooter.CourierHttpClient;
 import ru.praktikum.qa_scooter.pojo.CourierDTO;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 import static ru.praktikum.qa_scooter.config.ApiConfig.API_URL;
 
@@ -20,15 +23,15 @@ public class CourierBaseTest {
     }
 
 
-    @Step
+    @Step("Формируем данные для создания курьера")
     public CourierDTO generateCourier() {
-        String login = "gerda";
-        String password = "1234";
+        String login = RandomStringUtils.randomAlphanumeric(9);;
+        String password = RandomStringUtils.randomAlphanumeric(4);;
         String firstName = "saske";
         return new CourierDTO(login, password, firstName);
     }
 
-    @Step
+    @Step("Создаем курьера и запоминаем id")
     public void createCourierWithId(CourierDTO courierDTO) {
         courierHttpClient.createCourier(courierDTO);
         courierDTO.setId(courierHttpClient.login(courierDTO).extract().path("id").toString());
